@@ -1,0 +1,35 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Newsfeed Ingester</title>
+</head>
+<body>
+    <h1>
+        Newsfeed Ingester
+    </h1>
+
+    <form action='newsfeed_ingester/articles' method="POST">
+        <input type="text" placeholder="Enter a search term" name='keyword'>
+        <button type="submit">Get News</button>
+
+
+    </form>
+
+
+    {% for post in news %}
+    <h2>{{post['title']}}</h2>
+    <i>{{post['publishedAt']}}</i>
+    <p>{{post['description']}}</p>
+    {% endfor %}
+
+
+</body>
+</html>
+
+{% endblock %}
