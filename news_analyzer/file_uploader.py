@@ -2,14 +2,17 @@ from flask import (Blueprint, Flask, flash, request, redirect, render_template, 
 from werkzeug.utils import secure_filename
 from PyPDF2 import PdfFileReader
 from datetime import date
-from newsfeed_analyzer import app
-from newsfeed_analyzer.db import get_db
+from news_analyzer import app
+from news_analyzer.db import get_db
 import os
 import urllib.request
 from google.cloud import language_v1
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'high-mountain-308101-7fe5259b2655.json'
 
-bp = Blueprint('file_uploader', __name__, url_prefix='/file_uploader')
+bp = Blueprint('file_uploader', __name__, 
+                url_prefix='/file_uploader',
+                static_folder='static',
+                template_folder='templates')
 
 ALLOWED_EXTENSIONS = set(['pdf'])
 
@@ -18,7 +21,7 @@ def allowed_file(filename):
 	
 @bp.route('/')
 def index():
-	return render_template('file_uploader.html')
+	return render_template('file_uploader.html',title='File Upload')
 
 @bp.route('/', methods=['POST'])
 def upload_file():

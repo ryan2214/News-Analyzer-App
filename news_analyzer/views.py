@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import render_template
-from newsfeed_analyzer import app
+from news_analyzer import app
 
 @app.route('/')
 @app.route('/home')

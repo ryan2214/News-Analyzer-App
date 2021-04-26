@@ -1,9 +1,9 @@
 """
-This script runs the newsfeed_analyzer application using a development server.
+This script runs the news_analyzer application using a development server.
 """
 
 from os import environ
-from newsfeed_analyzer import app
+from news_analyzer import app
 
 if __name__ == '__main__':
     HOST = environ.get('SERVER_HOST', 'localhost')
