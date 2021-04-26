@@ -20,6 +20,9 @@ app.register_blueprint(auth.bp)
 import news_analyzer.file_uploader
 app.register_blueprint(file_uploader.bp)
 
+import news_analyzer.file_management
+app.register_blueprint(file_management.bp)
+
 import news_analyzer.news_ingester
 app.register_blueprint(news_ingester.bp)
 

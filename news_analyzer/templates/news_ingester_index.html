@@ -9,7 +9,12 @@
         <input type="text" placeholder="Enter a search term" name='keyword'>
         <button type="submit">Get News</button>
     </form>
-    
+    {% if result %}
+    <form style="text-align:left;" action='./add' method="POST">
+        <pre style="white-space: pre-wrap;word-wrap: break-word;">{{result}}</pre>
+        <img style="max-width:100%;"src={{imgurl}} alt=""/>
+    </form>
+    {% endif %}
     {% for post in news %}
     <h2>{{post['title']}}</h2>
     <i>{{post['publishedAt']}}</i>

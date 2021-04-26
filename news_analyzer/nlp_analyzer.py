@@ -12,11 +12,14 @@ bp = Blueprint('nlp_analyzer', __name__,
 @bp.route("/")
 def index():
     db = get_db()
-    files = db.execute('SELECT file_name,sentiment,sentiment_score,sentiment_magnitude FROM Files').fetchall()
+    files = db.execute('SELECT file_name,title,sentiment,sentiment_score,sentiment_magnitude FROM Files').fetchall()
     
-    result = 'File_Name\tSentiment\tsentiment_score\tsentiment_magnitude\n'
+    result = 'File_Name/title    Sentiment    sentiment_score    sentiment_magnitude\n'
     for f in files:
-        f_line = f[0]+'\t'+f[1]+'\t'+str(f[2])+'\t'+str(f[3])+'\n'
+        if f[0]:
+            f_line = f[0]+'    '+f[2]+'    '+'%.5f'%f[3]+'    '+'%.5f'%f[4]+'\n'
+        else:
+            f_line = f[1]+'    '+f[2]+'    '+'%.5f'%f[3]+'    '+'%.5f'%f[4]+'\n'
         result += f_line
     #print(result)
     return render_template("nlp_analyzer.html",result = result,title='NLP')

@@ -117,4 +117,4 @@ def create_file(file):
 def view_file():
     db = get_db()
     files = db.execute('SELECT * FROM Files').fetchall()
-    return jsonify(files)
+    return files
