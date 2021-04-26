@@ -13,21 +13,31 @@
 </head>
 
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="/" style="color:white;" class="navbar-brand">Home</a>
+    <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color:black;">
+            <a class="navbar-brand" href="/">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('file_uploader.index')}}">File Uploader</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('file_management.index')}}">File Management</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('nlp_analyzer.index') }}">NLP Results</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('news_ingester.index') }}">News Ingester</a>
+                </li>
+              </ul>
             </div>
-            
-            <ul style="list-style-type:none;" class="nav navbar-nav navbar-right">                   
-                <li><a style="color:white;" href="{{ url_for('file_uploader.index') }}">File Uploader</a></li>
-                <li><a style="color:white;" href="{{ url_for('file_management.index') }}">File Management</a></li>
-                <li><a style="color:white;" href="{{ url_for('nlp_analyzer.index') }}">NLP Results</a></li>
-                <li><a style="color:white;" href="{{ url_for('news_ingester.index') }}">News Ingester</a></li>                   
-            </ul>
-            
-        </div>
+          </nav>
     </div>
+    
 
     <div class="container body-content">
         {% block content %}{% endblock %}

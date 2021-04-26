@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 from .senti_analyze import *
 from PyPDF2 import PdfFileReader
 import cv2
-from datetime import date
+from datetime import date,datetime
 from news_analyzer import app
 from news_analyzer.db import get_db
 import os
@@ -29,7 +29,7 @@ def is_text(filename):
 	
 @bp.route('/')
 def index():
-	return render_template('file_uploader.html',title='File Upload')
+	return render_template('file_uploader.html',title='File Upload',year=datetime.now().year)
 
 @bp.route('/', methods=['POST'])
 def upload():

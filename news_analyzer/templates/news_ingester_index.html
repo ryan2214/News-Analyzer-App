@@ -1,17 +1,14 @@
 ﻿{% extends "layout.html" %}
 {% block content %}
-
-    <h1>
-        News Ingester
-    </h1>
-
-    <form action='' method="POST">
+    <title>News Ingester</title>    
+    <h1>News Ingester</h1>
+    <form action='' enctype='multipart/form-data' method="POST">
         <input type="text" placeholder="Enter a search term" name='keyword'>
         <input type="number" placeholder="Enter search amount" name='num'>
         <button type="submit">Get News</button>
     </form>
     {% for r in result %}
-    <form style="text-align:left;" action='./add' method="POST">
+    <form style="text-align:left;" action='' method="POST">
         <pre style="white-space: pre-wrap;word-wrap: break-word;">{{r.content}}</pre>
         <img style="max-width:100%;"src={{r.imgurl}} alt=""/>
     </form>

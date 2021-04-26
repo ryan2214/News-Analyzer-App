@@ -1,6 +1,7 @@
 from flask import (Blueprint, Flask, flash, render_template, request,jsonify)
 from google.cloud import language_v1
 from news_analyzer.db import get_db
+from datetime import datetime
 import os
 #os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'high-mountain-308101-7fe5259b2655.json'
 
@@ -22,11 +23,11 @@ def index():
             f_line = f[1]+'    '+f[2]+'    '+'%.5f'%f[3]+'    '+'%.5f'%f[4]+'\n'
         result += f_line
     #print(result)
-    return render_template("nlp_analyzer.html",result = result,title='NLP')
+    return render_template("nlp_analyzer.html",result = result,title='NLP',year=datetime.now().year)
 
 @bp.route("/", methods=["POST"])
 def nlp():
     text = request.form.get('text')
     #nlp = get_nlp_attr(text)
     #print(nlp)
-    return render_template("nlp_analyzer.html",title='NLP')
+    return render_template("nlp_analyzer.html",title='NLP',year=datetime.now().year)

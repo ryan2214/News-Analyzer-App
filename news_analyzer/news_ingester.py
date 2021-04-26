@@ -1,7 +1,7 @@
 from logging import raiseExceptions
 from flask import (Blueprint, Flask,g,redirect,render_template,request, jsonify, flash)
 from newsapi import NewsApiClient
-from datetime import date
+from datetime import datetime
 from news_analyzer.db import get_db
 from news_analyzer import app
 from .senti_analyze import *
@@ -43,7 +43,7 @@ def save_article(news):
 
 @bp.route('/')
 def index():
-    return render_template("news_ingester_index.html",title='Ingest')
+    return render_template("news_ingester_index.html",title='Ingest',year=datetime.now().year)
  
 @bp.route('/',methods=['POST']) 
 def get_article():
@@ -70,7 +70,7 @@ def get_article():
                     "imgurl":news['articles'][i]["urlToImage"]
                 }
                 resultlist.append(r)
-            return render_template("news_ingester_index.html",result=resultlist,title='Ingest') # pick the most relevant article
+            return render_template("news_ingester_index.html",result=resultlist,title='Ingest',year=datetime.now().year) # pick the most relevant article
 
 @bp.route('/add',methods=["POST", "GET"])     
 def add_article():

@@ -60,17 +60,3 @@ h3{
           color: yellowgreen;
      }
      
-     .pen .navbar-toggle {
-      border: none;
-      background: transparent !important;
-    }
-    
-    .pen .navbar-toggle:hover {
-      background: transparent !important;
-    }
-    
-    .pen .navbar-toggle .icon-bar {
-      width: 22px;
-      -webkit-transition: all 0.2s;
-      transition: all 0.2s;
-    }
