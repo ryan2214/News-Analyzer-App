@@ -10,6 +10,8 @@ $env:GOOGLE_APPLICATION_CREDENTIALS="your-key.json"
 
 python ./runserver.py
 
+access: http://localhost:5555/
+
 # Method
 
 ![image](https://user-images.githubusercontent.com/12250414/116111243-0c5dd980-a6e9-11eb-84b8-a78eae43cedc.png)
