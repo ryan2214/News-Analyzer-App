@@ -1,6 +1,10 @@
 # News-Analyzer-App
 Team 20
 
+Yuko Ishikawa
+
+Tianhe Lei
+
 # Setup Network and nlp key
 $env:HTTPS_PROXY="http://127.0.0.1:1080"
 
