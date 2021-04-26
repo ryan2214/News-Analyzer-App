@@ -6,6 +6,10 @@ $env:HTTPS_PROXY="http://127.0.0.1:1080"
 
 $env:GOOGLE_APPLICATION_CREDENTIALS="your-key.json"
 
+# Run
+
+python ./runserver.py
+
 # Method
 
 ![image](https://user-images.githubusercontent.com/12250414/116084644-964d7880-a6d0-11eb-8034-e49971132fa3.png)
