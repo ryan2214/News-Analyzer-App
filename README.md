@@ -33,6 +33,6 @@ During File upload process, we call the nlp API and save the NLP result with the
 
 ![image](https://user-images.githubusercontent.com/12250414/116087482-7bc8ce80-a6d3-11eb-9edb-ce8a7b3acbd1.png)
 
-Call newsapi to search from the Internet about the input keyword, show the first result and save it to the database.
+Call newsapi to search from the Internet about the input keyword, show the first several results and save it to the database.
 
 May choose how many news listed.
