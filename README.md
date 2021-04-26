@@ -39,4 +39,11 @@ During File upload process, we call the nlp API and save the NLP result with the
 
 Call newsapi to search from the Internet about the input keyword, show the first several results and save it to the database.
 
-*May choose how many news listed, but NLP will take a large amount of time if set to a big list.
+*May choose how many news listed, but NLP will take a large amount of time if set to a big list.*
+
+# Database Table
+![image](https://user-images.githubusercontent.com/12250414/116092432-63a77e00-a6d8-11eb-8e79-dd60e4e0b9fe.png)
+
+It doesn't feel good to store 2 kinds of objects in 1 table, but now it is.
+
+Files use file_name as index, news uses title as index.
