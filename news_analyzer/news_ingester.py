@@ -1,6 +1,8 @@
 from flask import (Blueprint, Flask,render_template,request, jsonify, flash)
 from newsapi import NewsApiClient
+from datetime import date
 from news_analyzer.db import get_db
+from news_analyzer import app
  
 bp = Blueprint('news_ingester', __name__, 
                 url_prefix='/news_ingester',
@@ -14,14 +16,23 @@ newsapi = NewsApiClient(api_key=APIKEY)
 def index():
     return render_template("news_ingester_index.html",title='Ingest')
  
-@bp.route('/article/<keyword>',methods=['GET']) 
-def get_article(keyword):
+@bp.route('/',methods=['POST']) 
+def get_article():
+    keyword = request.form.get('keyword')
     news = newsapi.get_everything(q=keyword,language='en', sort_by='relevancy')
     if news['totalResults'] == 0:
         app.logger.info('There is no such article')
         return jsonify({"error": "There is no such article",}), 403
-    else: 
-        return news['articles'][0] # pick the most relevant article
+    else:
+        result = "Author: "+news['articles'][0]["author"]+'\n'
+        result += "Content: "+news['articles'][0]["content"]+'\n'
+        result += "Description: "+news['articles'][0]["description"]+'\n'
+        result += "PublishedAt: "+news['articles'][0]["publishedAt"]+'\n'
+        result += "Source: "+news['articles'][0]["source"]["name"]+'\n'
+        result += "Title: "+news['articles'][0]["title"]+'\n'
+        result += "Url: "+news['articles'][0]["url"]+'\n'
+
+        return render_template("news_ingester_result.html",result=result,imgurl=news['articles'][0]["urlToImage"],title='Ingest') # pick the most relevant article
 
 @bp.route('/article/create/<keyword>',methods=["POST", "GET"])     
 def create_article(keyword):

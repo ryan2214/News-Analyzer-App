@@ -9,6 +9,10 @@
         <input type="text" placeholder="Enter a search term" name='keyword'>
         <button type="submit">Get News</button>
     </form>
+    <form style="text-align:left;"action=''>
+        <pre style="word-wrap:break-word;">{{result}}</pre>
+        <img style="max-width:100%;"src={{imgurl}} alt=""/>
+    </form>
     
     {% for post in news %}
     <h2>{{post['title']}}</h2>
