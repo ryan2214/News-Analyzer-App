@@ -7,14 +7,15 @@
 
     <form action='' method="POST">
         <input type="text" placeholder="Enter a search term" name='keyword'>
+        <input type="number" placeholder="Enter search amount" name='num'>
         <button type="submit">Get News</button>
     </form>
-    {% if result %}
+    {% for r in result %}
     <form style="text-align:left;" action='./add' method="POST">
-        <pre style="white-space: pre-wrap;word-wrap: break-word;">{{result}}</pre>
-        <img style="max-width:100%;"src={{imgurl}} alt=""/>
+        <pre style="white-space: pre-wrap;word-wrap: break-word;">{{r.content}}</pre>
+        <img style="max-width:100%;"src={{r.imgurl}} alt=""/>
     </form>
-    {% endif %}
+    {% endfor %}
     {% for post in news %}
     <h2>{{post['title']}}</h2>
     <i>{{post['publishedAt']}}</i>

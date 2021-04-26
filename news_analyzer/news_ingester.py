@@ -1,3 +1,4 @@
+from logging import raiseExceptions
 from flask import (Blueprint, Flask,g,redirect,render_template,request, jsonify, flash)
 from newsapi import NewsApiClient
 from datetime import date
@@ -47,21 +48,29 @@ def index():
 @bp.route('/',methods=['POST']) 
 def get_article():
     keyword = request.form.get('keyword')
+    num = int(request.form.get('num'))
     if keyword:
         news = newsapi.get_everything(q=keyword,language='en', sort_by='relevancy')
         if news['totalResults'] == 0:
             app.logger.info('There is no such article')
             return jsonify({"error": "There is no such article",}), 403
         else:
-            result = "Title: "+news['articles'][0]["title"]+'\n'
-            result += "Author: "+news['articles'][0]["author"]+'\n'
-            result += "PublishedAt: "+news['articles'][0]["publishedAt"]+'\n'
-            result += "Source: "+news['articles'][0]["source"]["name"]+'\n'
-            result += "Description: "+news['articles'][0]["description"]+'\n'
-            result += "Content: "+news['articles'][0]["content"]+'\n'
-            result += "Url: "+news['articles'][0]["url"]+'\n'
-            save_article(news['articles'][0])
-            return render_template("news_ingester_index.html",result=result,imgurl=news['articles'][0]["urlToImage"],title='Ingest') # pick the most relevant article
+            resultlist = []
+            for i in range(num):
+                result = "Title: "+news['articles'][i]["title"]+'\n'
+                result += "Author: "+news['articles'][i]["author"]+'\n'
+                result += "PublishedAt: "+news['articles'][i]["publishedAt"]+'\n'
+                result += "Source: "+news['articles'][i]["source"]["name"]+'\n'
+                result += "Description: "+news['articles'][i]["description"]+'\n'
+                result += "Content: "+news['articles'][i]["content"]+'\n'
+                result += "Url: "+news['articles'][i]["url"]+'\n'
+                save_article(news['articles'][i])
+                r = {
+                    "content":result,
+                    "imgurl":news['articles'][i]["urlToImage"]
+                }
+                resultlist.append(r)
+            return render_template("news_ingester_index.html",result=resultlist,title='Ingest') # pick the most relevant article
 
 @bp.route('/add',methods=["POST", "GET"])     
 def add_article():

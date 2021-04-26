@@ -76,7 +76,15 @@ def delete_file(file_name):
         'SELECT * FROM Files WHERE file_name = ?', (file_name,)
     ).fetchone()
     if files is None:
-        app.logger.info('There is no such file')
+        files = db.execute(
+            'SELECT * FROM Files WHERE title = ?', (file_name,)
+        ).fetchone()
+        if files is None:
+            app.logger.info('no file named this')
+        else:
+            db.execute('DELETE FROM Files WHERE title = ?', (file_name,))
+            db.commit()
+            app.logger.info('Successfully deleted the news')
     else:
         db.execute('DELETE FROM Files WHERE file_name = ?', (file_name,))
         db.commit()
