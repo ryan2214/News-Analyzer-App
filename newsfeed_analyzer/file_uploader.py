@@ -18,7 +18,7 @@ def allowed_file(filename):
 	
 @bp.route('/')
 def index():
-	return render_template('upload.html')
+	return render_template('file_uploader.html')
 
 @bp.route('/', methods=['POST'])
 def upload_file():
