@@ -1,33 +1,11 @@
 ﻿{% extends "layout.html" %}
 {% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NLP Analyzer</title>
-</head>
-<body>
     <h1>
         NLP Analyzer
     </h1>
-
-    <form action='nlp_analyzer/analyze' method="POST">
-        <input type="text" placeholder="Enter text you want to analyze" style="width:20em;height:10em" name='keyword'>
-        <button type="submit">Get result</button>
-
+    <form style="text-align:left"action=''>
+        <pre style="font-family: consolas;font-size: 15px;"id="output">{{result}}</pre>
     </form>
-
-    {% for post in nlp %}
-    <h2>{{post['sentiment_score']}}</h2>
-    <i>{{post['sentiment_magnitude']}}</i>
-    <p>{{post['sentiment']}}</p>
-    {% endfor %}
-
-
-</body>
-</html>
 
 {% endblock %}

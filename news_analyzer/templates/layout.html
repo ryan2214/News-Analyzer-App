@@ -5,28 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - News Analyzer</title>
     <link rel="stylesheet" type="text/css" href="static/content/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="static/content/v12.css" />
+    <link rel="stylesheet" type="text/css" href="static/content/v13.css" />
     <script src="static/scripts/modernizr.js"></script>
+    <script src="static/scripts/jquery-1.10.2.js"></script>
+    <script src="static/scripts/bootstrap.js"></script>
+    <script src="static/scripts/respond.js"></script>
 </head>
 
 <body>
-    <div class="navbar navbar-default" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle uarr collapsed" data-toggle="collapse" data-target="#navbar-collapse-uarr">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a href="/" style="color:white;" class="navbar-brand">Home</a>
             </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse-uarr">
-                <ul class="nav navbar-nav navbar-right">                   
-                    <li data-toggle="collapse" data-target="#navbar-collapse.in"><a style="color:white;" href="{{ url_for('file_uploader.index') }}">File Uploader</a></li>
-                    <li data-toggle="collapse" data-target="#navbar-collapse.in"><a style="color:white;" href="{{ url_for('nlp_analyzer.index') }}">NLP Analyzer</a></li>
-                    <li data-toggle="collapse" data-target="#navbar-collapse.in"><a style="color:white;" href="{{ url_for('news_ingester.index') }}">News Ingester</a></li>                   
-                </ul>
-            </div>
+            
+            <ul style="list-style-type:none;" class="nav navbar-nav navbar-right">                   
+                <li><a style="color:white;" href="{{ url_for('file_uploader.index') }}">File Uploader</a></li>
+                <li><a style="color:white;" href="{{ url_for('nlp_analyzer.index') }}">NLP Analyzer</a></li>
+                <li><a style="color:white;" href="{{ url_for('news_ingester.index') }}">News Ingester</a></li>                   
+            </ul>
             
         </div>
     </div>
@@ -38,10 +35,7 @@
             <p>&copy; {{ year }} - News Analyzer</p>
         </footer>
     </div>
-
-    <script src="static/scripts/jquery-1.10.2.js"></script>
-    <script src="static/scripts/bootstrap.js"></script>
-    <script src="static/scripts/respond.js"></script>
+ 
     {% block scripts %}{% endblock %}
 
 </body>

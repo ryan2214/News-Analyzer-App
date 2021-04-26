@@ -2,14 +2,17 @@ from flask import (Blueprint, Flask,render_template,request, jsonify, flash)
 from newsapi import NewsApiClient
 from news_analyzer.db import get_db
  
-bp = Blueprint('news_ingester', __name__, url_prefix='/news_ingester')
+bp = Blueprint('news_ingester', __name__, 
+                url_prefix='/news_ingester',
+                static_folder='static',
+                template_folder='templates')
  
 APIKEY = 'f9e31e950cd9484ab3fd7b069a3b39f5'   
 newsapi = NewsApiClient(api_key=APIKEY)
 
 @bp.route('/')
 def index():
-    return "News Ingester"
+    return render_template("news_ingester_index.html",title='Ingest')
  
 @bp.route('/article/<keyword>',methods=['GET']) 
 def get_article(keyword):

@@ -1,6 +1,5 @@
 import os
 from flask import Flask
-
 basepath = os.path.dirname(__file__)
 CURRENT_FOLDER = basepath
 

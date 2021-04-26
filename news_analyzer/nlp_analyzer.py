@@ -1,43 +1,29 @@
-from flask import (Blueprint, Flask, render_template, request)
+from flask import (Blueprint, Flask, flash, render_template, request,jsonify)
 from google.cloud import language_v1
+from news_analyzer.db import get_db
 import os
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'high-mountain-308101-7fe5259b2655.json'
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'high-mountain-308101-7fe5259b2655.json'
 
-bp = Blueprint('nlp_analyzer', __name__, url_prefix='/nlp_analyzer')
+bp = Blueprint('nlp_analyzer', __name__, 
+                url_prefix='/nlp_analyzer',
+                static_folder='static',
+                template_folder='templates')
 
 @bp.route("/")
 def index():
-    return "NLP Analyzer"
-
-@bp.route("/nlp/<text_content>", methods=["GET"])
-def analyze_nlp(text_content):
-
-    client = language_v1.LanguageServiceClient()
+    db = get_db()
+    files = db.execute('SELECT file_name,sentiment,sentiment_score,sentiment_magnitude FROM Files').fetchall()
     
-    type_ = language_v1.Document.Type.PLAIN_TEXT
-    
-    language = "en"
-    
-    document = {"content": text_content, "type_": type_, "language": language}
-    
-    encoding_type = language_v1.EncodingType.UTF8
+    result = 'File_Name\tSentiment\tsentiment_score\tsentiment_magnitude\n'
+    for f in files:
+        f_line = f[0]+'\t'+f[1]+'\t'+str(f[2])+'\t'+str(f[3])+'\n'
+        result += f_line
+    #print(result)
+    return render_template("nlp_analyzer.html",result = result,title='NLP')
 
-    response = client.analyze_sentiment(request = {'document': document, 'encoding_type': encoding_type})
-
-    nlp = {
-        "sentiment_score": "",
-        "sentiment_magnitude": "",
-        "sentiment": ""
-        }
-
-    nlp["sentiment_score"] = response.document_sentiment.score
-    nlp["sentiment_magnitude"] = response.document_sentiment.magnitude
-    
-    if response.document_sentiment.score < 0:
-        nlp["sentiment"] = "negative"
-    elif response.document_sentiment.score > 0:
-        nlp["sentiment"] = "positive"
-    else:
-        nlp["neutral"] = "neutral"
-
-    return jsonify(nlp)
+@bp.route("/", methods=["POST"])
+def nlp():
+    text = request.form.get('text')
+    #nlp = get_nlp_attr(text)
+    #print(nlp)
+    return render_template("nlp_analyzer.html",title='NLP')
