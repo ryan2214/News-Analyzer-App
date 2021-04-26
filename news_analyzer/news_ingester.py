@@ -24,12 +24,12 @@ def get_article():
         app.logger.info('There is no such article')
         return jsonify({"error": "There is no such article",}), 403
     else:
-        result = "Author: "+news['articles'][0]["author"]+'\n'
-        result += "Content: "+news['articles'][0]["content"]+'\n'
-        result += "Description: "+news['articles'][0]["description"]+'\n'
+        result = "Title: "+news['articles'][0]["title"]+'\n'
+        result += "Author: "+news['articles'][0]["author"]+'\n'
         result += "PublishedAt: "+news['articles'][0]["publishedAt"]+'\n'
         result += "Source: "+news['articles'][0]["source"]["name"]+'\n'
-        result += "Title: "+news['articles'][0]["title"]+'\n'
+        result += "Description: "+news['articles'][0]["description"]+'\n'
+        result += "Content: "+news['articles'][0]["content"]+'\n'
         result += "Url: "+news['articles'][0]["url"]+'\n'
 
         return render_template("news_ingester_result.html",result=result,imgurl=news['articles'][0]["urlToImage"],title='Ingest') # pick the most relevant article
